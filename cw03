@@ -1,0 +1,57 @@
+CREATE DATABASE Academy
+Use Academy
+Create Table Groups(
+Id int IDENTITY PRIMARY key,
+Name NVARCHAR(100) UNIQUE
+)
+Create Table Students(
+Id int IDENTITY PRIMARY key,
+Name NVARCHAR(100) UNIQUE,
+SurName NVARCHAR(100) UNIQUE,
+GroupId int foreign key REFERENCES Groups(id)  
+)
+Alter table Students
+Add Grade int
+
+Insert Into Groups
+VALUES
+('P236'),
+('P229'),
+('P221')
+Insert into Students(Name,SurName,GroupId)
+Values
+('Zahra','Rzazada',2),
+('Rashad','Rzayev',1),
+('Faiq','Memmedeov',1),
+('Elcan','Shalanov',1)
+
+--5--
+Select s.Name from Groups g 
+JOIN Students s
+on g.Id=s.GroupId AND s.GroupId=1
+
+--6--
+Select g.Name,Count(*) from Groups g 
+JOIN Students s
+on g.Id=s.GroupId
+GROUP By g.Name
+
+--7--
+
+CREATE VIEW usv_Getinfo
+AS
+select s.Name,g.Name as 'Group',s.SurName,s.Grade from Students s
+Join Groups g 
+ON g.Id=s.GroupId
+
+
+
+
+
+
+
+
+
+
+
+
